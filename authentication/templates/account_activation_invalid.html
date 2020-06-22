@@ -1,0 +1,13 @@
+{% extends 'base_generic.html' %}
+{% block sidebar %}
+<ul class="sidebar-nav">
+    <li><a href="{% url 'home' %}">home</a></li>
+    <li><a href="{% url 'signup' %}">Sign Up</a></li>
+    <li><a href="{% url 'login' %}">Log in</a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<p>
+    Email verification failed, probably link expired.
+</p>
+{% endblock %}

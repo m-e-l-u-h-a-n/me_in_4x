@@ -1,0 +1,10 @@
+{% extends 'base_generic.html' %}
+{% block sidebar %}
+<ul class="sidebar-nav">
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'login' %}">Login</a></li>
+</ul>
+{% endblock %}
+{% block content %}
+<p>Please confirm your email address to complete the registration.</p>
+{% endblock %}
