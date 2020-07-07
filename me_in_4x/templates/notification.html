@@ -1,0 +1,44 @@
+{% comment %}File to contain all notifidcation messages provided users{% endcomment %}
+{% if message == "Neither username nor email provided." %}
+<script>
+    iziToast.show({
+    title: "Warning",
+    message: "Neither username nor email provided.",
+    color: "Yellow",
+    position: "bottomCenter"
+  });
+</script>
+{% elif message == "Account deleted successfully!" %}
+<script>
+    iziToast.show({
+        title: "Success",
+        message: "Account deleted successfully!",
+        color: "Green",
+        position: "bottomCenter"
+    });
+</script>
+{% elif message == "No users with given username" %}
+<script>
+    iziToast.info({
+        title: "Info",
+        message: "No users with given username",
+        position: "bottomCenter"
+    });
+</script>
+{% elif message == "No users with given email" %}
+<script>
+    iziToast.info({
+        title: "Info",
+        message: "No users with given email",
+        position: "bottomCenter"
+    });
+</script>
+{% elif message == "Provide either of username or email to delete the account" %}
+<script>
+    iziToast.info({
+        title: "Info",
+        message: "Provide either of username or email to delete the account",
+        position: "bottomCenter"
+    });
+</script>
+{% endif %}

@@ -1,26 +1,32 @@
 {% extends 'base_generic.html' %}
 {% block title %}
 <title>Me In 4X | Login</title>
-{% endblock %}
-{% block sidebar %}
-<a href="{% url 'home' %}">Home</a>
-{% endblock %}
-
-{% block content %}
-<form method="POST">
+{% endblock title%}
+{% block body %}
+<form action="" method="POST" id="form">
     {% csrf_token %}
-    {% for field in form %}
-    <p>
-        {{field.label_tag}}<br>
-        {{field}}
-        {% if field.help_text %}
-        <small style="color: grey;">{{field.help_text}}</small>
-        {% endif %}
-        {% for errors in field.errors %}
-        <p style="color: red;">{{ errors }}</p>
-        {% endfor %}
-    </p>
-    {% endfor %}
-    <button type="submit">Login</button>
+    <div class="row" style="margin-top: 80px;">
+        <div class="form-group col-md-12">
+            <div class="container">
+                <div class="row">
+                    <label for="id_username" class="form-label col-md-2 align-self-center"><strong>Username:</strong></label>
+                    <input type="text" name="username" maxlength="256" required id="id_username" class="form-control col-md-10">
+                </div>
+            </div>
+        </div>
+        <div class="form-group col-md-12">
+            <div class="container">
+                <div class="row">
+                    <label for="id_password" class="form-label col-12 col-md-2 align-self-center"><strong>Password:</strong></label>
+                    <input type="password" name="password" maxlength="256" required id="id_password" class="form-control col-12 col-md-10">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <div class="container">
+                <button type="submit" class="btn btn-outline-warning text-black">Login</button>
+            </div>
+        </div>
+    </div>
 </form>
-{% endblock %}
+{% endblock body %}
