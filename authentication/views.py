@@ -12,12 +12,12 @@ from django.contrib.auth.models import User
 from django.http import HttpResponse, JsonResponse, HttpResponseBadRequest
 from .utils import send_email,delete_with_email,delete_with_username
 from django.views.decorators.csrf import csrf_exempt
+
 def home(request):
+    # redirect user to dashboard directly if authenticated(problem: logged in user will never be able to see it then)
     return render(request, 'home.html')
 
-# @login_required
-
-
+@login_required
 def logoutView(request, next_page):
     logout(request)
     return redirect('home')
@@ -46,7 +46,20 @@ def signup(request):
             # set redirection url
             return redirect('account_activation_sent')
         else:
-            pass
+            message = form.errors.as_text().split('\n  * ')
+            for i in message:
+                print(i)
+                i.rstrip("* username")
+                i.rstrip("\n* password2")
+                i.rstrip("\n* password1")
+                i.rstrip("\n* email")
+                if len(i) == 0:
+                    try:
+                        message.remove(i)
+                    except ValueError:
+                        pass
+            print(message)
+            return render(request, 'signup.html', {'form': form,"message":message})
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
@@ -79,15 +92,19 @@ def loginView(request):
         return redirect('home')
     if request.method == "POST":
         form = LoginForm(request.POST)
-        if form.is_valid() and form.verify_credentials_and_login_user(request):
-            return redirect('home')
+        if form.is_valid():
+            if form.verify_credentials_and_login_user(request):
+                return redirect('home')
+            else:
+                return render(request, 'login.html', {'form':form,"message":"Invalid credentials"})
         else:
-            pass  # render validation errors
+            return render(request, 'login.html', {'form':form,"message":"Facing validation errors contect admin if problem persists."})
     else:
         form = LoginForm()
-    return render(request, 'login.html', {'form': form})
+    return render(request, 'login.html', {'form': form,"message":""})
 
 @csrf_exempt
+@login_required
 def deleteView(request):
         if request.method == 'POST':
             data = request.POST
@@ -107,7 +124,7 @@ def deleteView(request):
                     response.status_code = 200
                 else:
                     print("1")
-                    response.status_code = 400
+                    response.status_code = 204
                 return response
             elif way == 'e':
                 email = data.get('email', '')
@@ -117,7 +134,7 @@ def deleteView(request):
                     response.status_code = 200
                 else:
                     print("2")
-                    response.status_code = 400
+                    response.status_code = 204
                 return response
             elif way == 'b':
                 username = data.get('username', '')

@@ -1,17 +1,30 @@
-{% extends 'base_generic.html' %}
-{% load static %}
-{% block title %}
+{% extends 'base_generic.html' %} {% load static %} {% block title %}
 <title>Me In 4X | Home</title>
-{% endblock title %}
-{% block body %}
+{% endblock title %} {% block navlinks %}
+<li class="nav-item active">
+    <a href="{% url 'home' %}" class="nav-link"><span class="fa fa-home fa-lg"></span> Home</a>
+</li>
+{% if user.is_authenticated %}
+<li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><i class="fa fa-inbox fa-lg"></i>
+        Dashboard</a></li>
+<li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span class="fa fa-sign-out fa-lg"></span>Logout</a>
+</li>
+<li class="nav-item"><a href="{% url 'delete_account' %}" class="nav-link"><span
+            class="fa fa-trash fa-lg"></span>Delete account</a></li>
+{% else %}
+<li class="nav-item"><a href="{% url 'signup' %}" class="nav-link"><span class="fa fa-cash-register"></span> Register</a>
+</li>
+<li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+</li>
+{% endif %} {% endblock navlinks %}{% block body %}
 <header class="jumbotron">
     <div class="container">
         <div class="row row-header">
             <div class="col-12 justify-content-center">
                 <h1>Welcome to Me in 4x</h1>
-                <h4>Here you can create a backup of your memories along with related context and titles for a particular memory.</h4>
-                <h4>So, don't wait proceed to your personalised dashboard of memories</h4><a
-                    href="{% url 'dashboard' %}" role="button" class="btn btn-primary" style="color: floralwhite;">Proceed to Dashboard</a>
+                <h4>Here you can create a backup of your memories along with related context and titles for a particular memory.
+                </h4>
+                <h4>So, don't wait proceed to your personalised dashboard of memories</h4><a href="{% url 'dashboard' %}" role="button" class="btn btn-primary" style="color: floralwhite;">Proceed to Dashboard</a>
             </div>
         </div>
     </div>
@@ -23,7 +36,9 @@
                 What is Me in 4x
             </h3>
             <div class="card-body">
-                <p>Me in 4x, provides solution to your memory backup needs as here you can store your memories in any format and also store the context regarding that memory.So now you can stop worrying about where to store data and why you stored a particular instance.</p>
+                <p>Me in 4x, provides solution to your memory backup needs as here you can store your memories in any format and also store the context regarding that memory.So now you can stop worrying about where to store data and why you stored a particular
+                    instance.
+                </p>
                 <h4>Register if still haven't and start saving your memories</h4>
                 <a href="{% url 'dashboard' %}" class="btn btn-outline-warning">Proceed to dashboard</a>
             </div>

@@ -1,31 +1,39 @@
-{% extends 'base_generic.html' %}
-{% block title %}
-Me in 4x | account activation invalid
-{% endblock title %}
-{% block body %}
+{% extends 'base_generic.html' %} {% load static %} {% block title %}
+<title>Me In 4X | Account activation sent</title>
+{% endblock title %} {% block navlinks %}
+<li class="nav-item">
+    <a href="{% url 'home' %}" class="nav-link"><span class="fa fa-home fa-lg"></span> Home</a>
+</li>
+{% if user.is_authenticated %}
+<li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><i class="fa fa-inbox fa-lg"></i>
+        Dashboard</a></li>
+<li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span class="fa fa-sign-out fa-lg"></span>Logout</a>
+</li>
+<li class="nav-item"><a href="{% url 'delete_account' %}" class="nav-link"><span class="fa fa-trash fa-lg"></span>Delete
+        account</a></li>
+{% else %}
+<li class="nav-item"><a href="{% url 'signup' %}" class="nav-link"><span class="fa fa-cash-register"></span>
+        Register</a>
+</li>
+<li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+</li>
+{% endif %} {% endblock navlinks %} {% block body %}
 <div class="row align-items-center">
-    <div class="col-12">
-        <p>Email verification failed, probably your one time link is expired link expired</p>
-        <h3>Follow below procedure to re-register</h3>
-        <ul>
-            <li>Send a delete request to the email you used for registering. <a href="{% url 'delete_account' %}" class="btn btn-outline-warning" role="button">Click here</a> </li>
-            <li>Re-register using same email address again.</li>
-            <li>Verify your email address.</li>
-        </ul>
+    <div class="account-activation">
+        <div class="row align-items-center">
+            <div class="col-12">
+                <h3>Email verification failed, probably your one time link is expired or used.
+                </h3>
+                <h4>Don't panic, if you haven't verified your email,then follow the procedure below.</h4>
+                <ul>
+                    <li>Login using your account credentials <a href="{% url 'login' %}" class="btn btn-outline-warning" role="button">Click
+                        here</a></li>
+                    <li>Send a delete request to the email you used for registering. </li>
+                    <li>Re-register using same email address again.</li>
+                    <li>Verify your email address.</li>
+                </ul>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock body %}
-{% comment %}
-{% block sidebar %}
-<ul class="sidebar-nav">
-    <li><a href="{% url 'home' %}">home</a></li>
-    <li><a href="{% url 'signup' %}">Sign Up</a></li>
-    <li><a href="{% url 'login' %}">Log in</a></li>
-</ul>
-{% endblock %}
-{% block content %}
-<p>
-    Email verification failed, probably link expired.
-</p>
-{% endblock %}
-{% endcomment %}

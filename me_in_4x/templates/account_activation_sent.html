@@ -1,10 +1,25 @@
-{% extends 'base_generic.html' %}
-{% block sidebar %}
-<ul class="sidebar-nav">
-    <li><a href="{% url 'home' %}">Home</a></li>
-    <li><a href="{% url 'login' %}">Login</a></li>
-</ul>
-{% endblock %}
-{% block content %}
-<p>Please confirm your email address to complete the registration.</p>
-{% endblock %}
+{% extends 'base_generic.html' %} {% load static %} {% block title %}
+<title>Me In 4X | Account activation sent</title>
+{% endblock title %} {% block navlinks %}
+<li class="nav-item">
+    <a href="{% url 'home' %}" class="nav-link"><span class="fa fa-home fa-lg"></span> Home</a>
+</li>
+{% if user.is_authenticated %}
+<li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><i class="fa fa-inbox fa-lg"></i>
+        Dashboard</a></li>
+<li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span class="fa fa-sign-out fa-lg"></span>Logout</a>
+</li>
+<li class="nav-item"><a href="{% url 'delete_account' %}" class="nav-link"><span
+            class="fa fa-trash fa-lg"></span>Delete account</a></li>
+{% else %}
+<li class="nav-item"><a href="{% url 'signup' %}" class="nav-link"><span class="fa fa-cash-register"></span> Register</a>
+</li>
+<li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+</li>
+{% endif %} {% endblock navlinks %} {% block body %}
+<div class="account-activation">
+    <p>
+        Please verify your email using the one time link sent to the email you provided while registering.<strong>In case you fail to do so within seven days of registering, your account and all its content will be deleted irreversibly.</strong>
+    </p>
+</div>
+{% endblock body %}
