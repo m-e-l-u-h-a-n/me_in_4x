@@ -1,8 +1,22 @@
-{% extends 'base_generic.html' %}
-{% block title %}
+{% extends 'base_generic.html' %} {% block title %}
 <title>Me in 4x | Delete account</title>
-{% endblock title %}
-{% block body %}
+{% endblock title %} {% block navlinks %}
+<li class="nav-item">
+    <a href="{% url 'home' %}" class="nav-link"><span class="fa fa-home fa-lg"></span> Home</a>
+</li>
+{% if user.is_authenticated %}
+<li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><i class="fas fa-inbox fa-lg"></i>
+        Dashboard</a></li>
+<li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span class="fa fa-sign-out fa-lg"></span>Logout</a>
+</li>
+<li class="nav-item active"><a href="{% url 'delete_account' %}" class="nav-link"><span
+            class="fa fa-trash-alt fa-lg"></span>Delete account</a></li>
+{% else %}
+<li class="nav-item"><a href="{% url 'signup' %}" class="nav-link"><i class="fas fa-cash-register"></i> Register</a>
+</li>
+<li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+</li>
+{% endif %} {% endblock navlinks %}{% block body %}
 <div class="row">
     <h4><strong>Enter either of email or username to delete to the account.</strong></h4>
 </div>
@@ -10,8 +24,7 @@
     <div class="form-group col-md-12">
         <div class="container">
             <div class="row">
-                <label for="id_email"
-                    class="form-label col-12 col-md-2 align-self-center"><strong>Email:</strong></label>
+                <label for="id_email" class="form-label col-12 col-md-2 align-self-center"><strong>Email:</strong></label>
                 <input type="email" name="email" maxlength="256" id="id_email" class="form-control col-12 col-md-10">
             </div>
         </div>
@@ -19,8 +32,7 @@
     <div class="form-group col-md-12">
         <div class="container">
             <div class="row">
-                <label for="id_username"
-                    class="form-label col-md-2 align-self-center"><strong>Username:</strong></label>
+                <label for="id_username" class="form-label col-md-2 align-self-center"><strong>Username:</strong></label>
                 <input type="text" name="username" maxlength="256" id="id_username" class="form-control col-md-10">
             </div>
         </div>
@@ -31,41 +43,34 @@
         </div>
     </div>
 </div>
-{% endblock body %}
-{% block extra %}
+{% endblock body %} {% block footer %}
 <script>
     function deleteAccount() {
-        requestUsername = 'tullu_pump'; requestUsermail = 'ckvmda,kmvksm';
         const username = document.getElementById("id_username").value;
         const email = document.getElementById("id_email").value;
         console.log(`username = ${username}`);
         console.log(`email = ${email}`);
-        console.log(`requestUsername = ${requestUsername}`);
-        console.log(`requestUsermail = ${requestUsermail}`);
+        console.log('user.username= ' + "{{user.username}}");
         if (username.length == 0 && email.length == 0) {
             iziToast.warning({
                 title: "Warning",
                 message: "Enter at least one field",
                 position: "bottomCenter"
             });
-        }
-        else {
-            if ((username.length > 0 && username != requestUsername) || (email.length > 0 && email != requestUsermail)) {
+        } else {
+            if ((username.length > 0 && username != "{{user.username}}") || (email.length > 0 && email != "{{user.email}}")) {
                 iziToast.warning({
                     title: "Warning",
                     message: "Please enter your account's credentials!",
                     position: "bottomCenter"
                 });
-            }
-            else {
+            } else {
                 let way;
                 if (username != '' && email == '') {
                     way = "u";
-                }
-                else if (username == '' && email != '') {
+                } else if (username == '' && email != '') {
                     way = "e";
-                }
-                else {
+                } else {
                     way = "b";
                 }
                 $.ajax({
@@ -76,29 +81,56 @@
                         username: username,
                         email: email,
                     },
-                    success: function (data, status, xhr) {
-                        iziToast.success(
-                            {
+                    statusCode: {
+                        200: function(data, status, xhr) {
+                            let message = data.message;
+                            iziToast.success({
                                 title: "Success",
-                                message: "Account deleted successfully",
+                                message: message,
                                 position: "bottomCenter"
-                            }
-                        );
-                        window.location.replace("");
-                    },
-                    error: function (xhr, status, err) {
-                        iziToast.error(
-                            {
+                            });
+                        },
+                        203: function(data, status, xhr) {
+                            let message = data.message;
+                            iziToast.info({
+                                title: "Info",
+                                message: message,
+                                position: "bottomCenter"
+                            });
+                        },
+                        404: function(xhr, status, err) {
+                            iziToast.show({
                                 title: "Error",
-                                message: "No users with given credentials!",
+                                message: "Coudln't delete now some problem occured.",
+                                color: "Red",
                                 position: "bottomCenter"
-                            }
-                        );
+                            });
+                        },
+                        500: function(xhr, status, xhr) {
+                            iziToast.show({
+                                title: "Error",
+                                message: "Interval Server occured."
+                            });
+                        }
                     }
+                    // success: function (data, status, xhr) {
+                    //     iziToast.success({
+                    //         title: "Success",
+                    //         message: "Account deleted successfully",
+                    //         position: "bottomCenter"
+                    //     });
+                    //     // window.location.replace("");
+                    // },
+                    // error: function (xhr, status, err) {
+                    //     iziToast.error({
+                    //         title: "Error",
+                    //         message: "No users with given credentials!",
+                    //         position: "bottomCenter"
+                    //     });
+                    // }
                 })
             }
         }
     }
 </script>
-{% include 'notification.html' %}
-{% endblock extra %}
+{% include 'notification.html' %} {% endblock footer %}

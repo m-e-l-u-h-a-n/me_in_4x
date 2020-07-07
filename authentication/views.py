@@ -107,7 +107,7 @@ def deleteView(request):
                     response.status_code = 200
                 else:
                     print("1")
-                    response.status_code = 400
+                    response.status_code = 204
                 return response
             elif way == 'e':
                 email = data.get('email', '')
@@ -117,7 +117,7 @@ def deleteView(request):
                     response.status_code = 200
                 else:
                     print("2")
-                    response.status_code = 400
+                    response.status_code = 204
                 return response
             elif way == 'b':
                 username = data.get('username', '')

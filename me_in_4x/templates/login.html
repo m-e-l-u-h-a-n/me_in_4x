@@ -1,8 +1,22 @@
-{% extends 'base_generic.html' %}
-{% block title %}
+{% extends 'base_generic.html' %} {% block title %}
 <title>Me In 4X | Login</title>
-{% endblock title%}
-{% block body %}
+{% endblock title%} {% block navlinks %}
+<li class="nav-item">
+    <a href="{% url 'home' %}" class="nav-link"><span class="fa fa-home fa-lg"></span> Home</a>
+</li>
+{% if user.is_authenticated %}
+<li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><i class="fas fa-inbox fa-lg"></i>
+        Dashboard</a></li>
+<li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span class="fa fa-sign-out fa-lg"></span>Logout</a>
+</li>
+<li class="nav-item"><a href="{% url 'delete_account' %}" class="nav-link"><span
+            class="fa fa-trash-alt fa-lg"></span>Delete account</a></li>
+{% else %}
+<li class="nav-item"><a href="{% url 'signup' %}" class="nav-link"><i class="fas fa-cash-register"></i> Register</a>
+</li>
+<li class="nav-item active"><a href="{% url 'login' %}" class="nav-link"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+</li>
+{% endif %} {% endblock navlinks %} {% block body %}
 <form action="" method="POST" id="form">
     {% csrf_token %}
     <div class="row" style="margin-top: 80px;">

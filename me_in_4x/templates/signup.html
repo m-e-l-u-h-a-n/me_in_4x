@@ -1,9 +1,22 @@
-{% extends 'base_generic.html' %}
-{% load static %}
-{% block title %}
+{% extends 'base_generic.html' %} {% load static %} {% block title %}
 <title>Me In 4X | SignUp</title>
-{% endblock title%}
-{% block body %}
+{% endblock title%} {% block navlinks %}
+<li class="nav-item">
+    <a href="{% url 'home' %}" class="nav-link"><span class="fa fa-home fa-lg"></span> Home</a>
+</li>
+{% if user.is_authenticated %}
+<li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><i class="fas fa-inbox fa-lg"></i>
+        Dashboard</a></li>
+<li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span class="fa fa-sign-out fa-lg"></span>Logout</a>
+</li>
+<li class="nav-item"><a href="{% url 'delete_account' %}" class="nav-link"><span
+            class="fa fa-trash-alt fa-lg"></span>Delete account</a></li>
+{% else %}
+<li class="nav-item active"><a href="{% url 'signup' %}" class="nav-link"><i class="fas fa-cash-register"></i> Register</a>
+</li>
+<li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span class="fa fa-sign-in fa-lg"></span> Login</a>
+</li>
+{% endif %} {% endblock navlinks %} {% block body %}
 <div class="row">
     <form method="POST" style="margin-top: 60px;">
         {% csrf_token %}
@@ -18,8 +31,7 @@
             </div>
             <div class="col-md-12 form-group">
                 <label for="id_username" class="form-label"><strong>Username:</strong></label>
-                <input type="text" name="username" maxlength="150" class="form-control" autofocus required
-                    id="id_username">
+                <input type="text" name="username" maxlength="150" class="form-control" autofocus required id="id_username">
                 <small class="text-muted">
                     Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
                 </small>
@@ -33,8 +45,7 @@
             </div>
             <div class="col-md-12 form-group">
                 <label for="id_password1" class="form-label"><strong>Password:</strong></label>
-                <input type="password" name="password1" required autocomplete="new-password" id="id_password1"
-                    class="form-control">
+                <input type="password" name="password1" required autocomplete="new-password" id="id_password1" class="form-control">
                 <small class="text-muted">
                     <ul class="list-unstyled">
                         <li>Your password can’t be too similar to your other personal information.</li>
@@ -46,8 +57,7 @@
             </div>
             <div class="col-md-12 form-group">
                 <label for="id_password2" class="form-label"><strong>Confirm Password:</strong></label>
-                <input type="password" name="password2" required autocomplete="new-password" id="id_password2"
-                    class="form-control">
+                <input type="password" name="password2" required autocomplete="new-password" id="id_password2" class="form-control">
                 <small class="text-muted">
                     Enter the same password as before, for verification.
                 </small>
@@ -58,18 +68,11 @@
         </div>
     </form>
 </div>
-{% endblock body %}
-{% comment %}
-{% for field in form %}
+{% endblock body %} {% comment %} {% for field in form %}
 <p>
-    {{field.label_tag}}<br>
-    {{field}}
-    {% if field.help_text %}
-    <small style="color: grey;">{{field.help_text}}</small>
-    {% endif %}
-    {% for errors in field.errors %}
+    {{field.label_tag}}<br> {{field}} {% if field.help_text %}
+    <small style="color: grey;">{{field.help_text}}</small> {% endif %} {% for errors in field.errors %}
     <p style="color: red;">{{ errors }}</p>
     {% endfor %}
 </p>
-{% endfor %}
-{% endcomment %}
+{% endfor %} {% endcomment %}
