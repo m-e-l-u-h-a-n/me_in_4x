@@ -1,0 +1,23 @@
+.navbar{
+    background-color: #512DAB;
+}
+.jumbotron{
+  margin: 0px auto;
+  padding: 70px 30px;
+  background: #9575CD;
+  color: floralwhite;
+}
+.card{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+footer{
+    background-color: #D1C4E9;
+    margin: 0px auto;
+    padding: 20px 0px;
+}
+.footer .btn-social-icon{
+    margin-right: 5px;
+}
+
+

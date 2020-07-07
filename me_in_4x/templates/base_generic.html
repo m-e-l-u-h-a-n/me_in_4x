@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% block title %}{% endblock title%}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap-social.css' %}">
+    <link rel="stylesheet" href="{% static 'css/iziToast.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base_style.css' %}">
+    <script src="https://kit.fontawesome.com/923c5db4bc.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark navbar-expand-sm static-top">
+        <div class="container">
+            <button type="button" class="navbar-toggler " data-toggle="collapse" data-target="#Navbar"><span
+                    class="navbar-toggler-icon"></span></button>
+            <a href="{% url 'home' %}" class="navbar-brand mr-auto">Me in 4x</a>
+            <div class="collapse navbar-collapse" id="Navbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a href="{% url 'home' %}" class="nav-link"><span class="fa fa-home fa-lg"></span> Home</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><i
+                                class="fas fa-inbox fa-lg"></i>
+                            Dashboard</a></li>
+                    <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span
+                                class="fa fa-sign-out"></span>Logout</a></li>
+                    <li class="nav-item"><a href="{% url 'delete_account' %}" class="nav-link"><span class="fa fa-trash-alt fa-lg"></span>Delete account</a></li>
+                    {% else %}
+                    <li class="nav-item"><a href="{% url 'signup' %}" class="nav-link"><i
+                                class="fas fa-cash-register"></i> Register</a></li>
+                    <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span
+                                class="fa fa-sign-in fa-lg"></span> Login</a></li>
+                    {% endif %}
+                    {% block navbar %}{% endblock navbar %}
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        {% block body %}{% endblock body %}
+        <div class="row">
+            <div class="col-sm-2">
+                {% block sidebar %}{% endblock %}
+            </div>
+            <div class="col-sm-10 ">{% block content %}{% endblock content %}</div>
+        </div>
+    </div>
+    <footer class="footer" id="footer">
+        <div class="container">
+            <div class="row justify-content-center">
+                <p>Copyright &copy;
+                    <script>document.write(new Date().getFullYear());</script> All Rights Reserved</p>
+            </div>
+            <div class="row justify-content-center">
+                <a href="https://github.com/m-e-l-u-h-a-n" class="btn btn-social-icon btn-github"><i
+                        class="fa fa-github"></i></a>
+                <a href="https://linkedin.com/in/purushottam-tiwari-5853b0190"
+                    class="btn btn-social-icon btn-linkedin"><i class="fa fa-linkedin"></i></a>
+                <a href="http://wa.me/918955316471" class="btn btn-social-icon"><i class="fa fa-whatsapp"
+                        style="background-color: rgb(43, 167, 18); color: ghostwhite;"></i></a>
+                <a href="mailto:purushottamtiwaribanda@gmail.com" class="btn btn-social-icon"><i
+                        style="color: rgb(20, 95, 124);" class="fa fa-envelope-o "></i></a>
+            </div>
+        </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <!-- <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/popper.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script> -->
+    <script src="{% static 'js/iziToast.min.js' %}"></script>
+    {% block extra %}{% endblock extra %}
+    <script>
+        $(document).ready(function () {
+            setInterval(function () {
+                var docHeight = $(window).height();
+                var footerHeight = $('#footer').height();
+                var footerTop = $('#footer').position().top + footerHeight;
+                var marginTop = (docHeight - footerTop + 10);
+
+                if (footerTop < docHeight)
+                    $('#footer').css('margin-top', marginTop + 'px');
+                else
+                    $('#footer').css('margin-top', '0px');
+            }, 250);
+        });
+    </script>
+</body>
+
+</html>

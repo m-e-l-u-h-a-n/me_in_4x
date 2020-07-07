@@ -1,0 +1,33 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block title %}
+<title>Me In 4X | Home</title>
+{% endblock title %}
+{% block body %}
+<header class="jumbotron">
+    <div class="container">
+        <div class="row row-header">
+            <div class="col-12 justify-content-center">
+                <h1>Welcome to Me in 4x</h1>
+                <h4>Here you can create a backup of your memories along with related context and titles for a particular memory.</h4>
+                <h4>So, don't wait proceed to your personalised dashboard of memories</h4><a
+                    href="{% url 'dashboard' %}" role="button" class="btn btn-primary" style="color: floralwhite;">Proceed to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</header>
+<div class="row">
+    <div class="col">
+        <div class="card">
+            <h3 class="card-header bg-warning text-white">
+                What is Me in 4x
+            </h3>
+            <div class="card-body">
+                <p>Me in 4x, provides solution to your memory backup needs as here you can store your memories in any format and also store the context regarding that memory.So now you can stop worrying about where to store data and why you stored a particular instance.</p>
+                <h4>Register if still haven't and start saving your memories</h4>
+                <a href="{% url 'dashboard' %}" class="btn btn-outline-warning">Proceed to dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock body %}

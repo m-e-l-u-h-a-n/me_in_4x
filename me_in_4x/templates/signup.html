@@ -1,0 +1,75 @@
+{% extends 'base_generic.html' %}
+{% load static %}
+{% block title %}
+<title>Me In 4X | SignUp</title>
+{% endblock title%}
+{% block body %}
+<div class="row">
+    <form method="POST" style="margin-top: 60px;">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-md-12 form-group">
+                <label for="id_first_name" class="form-label"><strong>First Name:</strong></label>
+                <input type="text" name="first_name" maxlength="30" class="form-control" id="id_first_name">
+            </div>
+            <div class="col-md-12 form-group">
+                <label for="id_last_name" class="form-label"><strong>Last Name:</strong></label>
+                <input type="text" name="last_name" maxlength="150" class="form-control" id="id_last_name">
+            </div>
+            <div class="col-md-12 form-group">
+                <label for="id_username" class="form-label"><strong>Username:</strong></label>
+                <input type="text" name="username" maxlength="150" class="form-control" autofocus required
+                    id="id_username">
+                <small class="text-muted">
+                    Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.
+                </small>
+            </div>
+            <div class="col-md-12 form-group">
+                <label for="id_email" class="form-label"><strong>Email:</strong></label>
+                <input type="email" name="email" maxlength="254" class="form-control" id="id_email">
+                <small class="text-muted">
+                    Required
+                </small>
+            </div>
+            <div class="col-md-12 form-group">
+                <label for="id_password1" class="form-label"><strong>Password:</strong></label>
+                <input type="password" name="password1" required autocomplete="new-password" id="id_password1"
+                    class="form-control">
+                <small class="text-muted">
+                    <ul class="list-unstyled">
+                        <li>Your password can’t be too similar to your other personal information.</li>
+                        <li>Your password must contain at least 8 characters.</li>
+                        <li>Your password can’t be a commonly used password.</li>
+                        <li>Your password can’t be entirely numeric.</li>
+                    </ul>
+                </small>
+            </div>
+            <div class="col-md-12 form-group">
+                <label for="id_password2" class="form-label"><strong>Confirm Password:</strong></label>
+                <input type="password" name="password2" required autocomplete="new-password" id="id_password2"
+                    class="form-control">
+                <small class="text-muted">
+                    Enter the same password as before, for verification.
+                </small>
+            </div>
+            <div class="col-md-12 form-group">
+                <button type="submit" class="btn btn-outline-warning text-black">Sign Up</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock body %}
+{% comment %}
+{% for field in form %}
+<p>
+    {{field.label_tag}}<br>
+    {{field}}
+    {% if field.help_text %}
+    <small style="color: grey;">{{field.help_text}}</small>
+    {% endif %}
+    {% for errors in field.errors %}
+    <p style="color: red;">{{ errors }}</p>
+    {% endfor %}
+</p>
+{% endfor %}
+{% endcomment %}

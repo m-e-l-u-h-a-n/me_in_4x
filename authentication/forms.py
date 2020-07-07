@@ -1,28 +1,21 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate, login
+
 
 class SignUpForm(UserCreationForm):
-
     email = forms.EmailField(max_length=254, help_text='Required')
-
-    # uncomment it before pushing
-
-    # def clean_email(self):
-    #     email = self.cleaned_data['email']
-    #     if User.objects.filter(email=email).exists():
-    #         raise forms.ValidationError("Email is already registered")
-    #     return email
 
     class Meta:
         model = User
         fields = ('first_name', 'last_name', 'username',
                   'email', 'password1', 'password2',)
+
 class LoginForm(forms.Form):
 
     username = forms.CharField(max_length=256)
-    password = forms.CharField(max_length=256,widget=forms.PasswordInput())
+    password = forms.CharField(max_length=256, widget=forms.PasswordInput())
 
     def verify_credentials_and_login_user(self, request):
         username = self.cleaned_data['username']
@@ -33,3 +26,7 @@ class LoginForm(forms.Form):
             return True
         else:
             return False
+
+class DeleteForm(forms.Form):
+    email = forms.EmailField(max_length=256,widget=forms.EmailInput)
+    username = forms.CharField(max_length=256)
