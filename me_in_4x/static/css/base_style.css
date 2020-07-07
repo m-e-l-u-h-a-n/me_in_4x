@@ -1,23 +1,39 @@
-.navbar{
+.navbar {
     background-color: #512DAB;
 }
-.jumbotron{
-  margin: 0px auto;
-  padding: 70px 30px;
-  background: #9575CD;
-  color: floralwhite;
+
+.jumbotron {
+    margin: 0px auto;
+    padding: 70px 30px;
+    background: #9575CD;
+    color: floralwhite;
 }
-.card{
+
+.card {
     margin-top: 20px;
     margin-bottom: 20px;
 }
-footer{
+
+footer {
     background-color: #D1C4E9;
     margin: 0px auto;
     padding: 20px 0px;
 }
-.footer .btn-social-icon{
+
+.footer .btn-social-icon {
     margin-right: 5px;
 }
 
-
+.account-activation {
+    margin-top: 120px;
+    height: 225px;
+    width: 100%;
+    border: 1px dashed #512DAB;
+    border-radius: 20px;
+    padding: 20px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    background-color: #f9fcff;
+}

@@ -5,18 +5,18 @@
     <a href="{% url 'home' %}" class="nav-link"><span class="fa fa-home fa-lg"></span> Home</a>
 </li>
 {% if user.is_authenticated %}
-<li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><i class="fas fa-inbox fa-lg"></i>
+<li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link"><i class="fa fa-inbox fa-lg"></i>
         Dashboard</a></li>
 <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link"><span class="fa fa-sign-out fa-lg"></span>Logout</a>
 </li>
 <li class="nav-item"><a href="{% url 'delete_account' %}" class="nav-link"><span
-            class="fa fa-trash-alt fa-lg"></span>Delete account</a></li>
+            class="fa fa-trash fa-lg"></span>Delete account</a></li>
 {% else %}
-<li class="nav-item"><a href="{% url 'signup' %}" class="nav-link"><i class="fas fa-cash-register"></i> Register</a>
+<li class="nav-item"><a href="{% url 'signup' %}" class="nav-link"><span class="fa fa-cash-register"></span> Register</a>
 </li>
 <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span class="fa fa-sign-in fa-lg"></span> Login</a>
 </li>
-{% endif %} {% endblock navlinks %} {% block body %}
+{% endif %} {% endblock navlinks %}{% block body %}
 <header class="jumbotron">
     <div class="container">
         <div class="row row-header">

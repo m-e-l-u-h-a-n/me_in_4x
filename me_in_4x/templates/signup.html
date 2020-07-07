@@ -75,4 +75,12 @@
     <p style="color: red;">{{ errors }}</p>
     {% endfor %}
 </p>
-{% endfor %} {% endcomment %}
+{% endfor %} {% endcomment %} {% block footer %} {% if message %} {% for error in message %}
+<script>
+    error = "{{error}}"
+    iziToast.error({
+        title: "Error",
+        message: error,
+    });
+</script>
+{% endfor %} {% endif %} {% endblock footer %}
