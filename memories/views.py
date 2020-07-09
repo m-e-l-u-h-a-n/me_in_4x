@@ -4,20 +4,18 @@ from .models import Memory
 from authentication.models import Profile
 # Create your views here.
 
-
-@login_required
 def dashboardView(request):
     user = request.user
     if user.is_authenticated:
         profile = Profile.objects.get(user=user)
-        memories = Memory.objects.filter(owner=Profile)
+        memories = Memory.objects.filter(owner=profile)
         context = {
             'message': 'Success',
             'user': user,
             'profile': profile,
             'momories': memories,
         }
-        return render(request, 'memories.html', context=context)
+        return render(request, 'dashboard.html', context=context)
     else:
         context = {
             'message': 'Error',
@@ -45,3 +43,6 @@ def memoryDetailView(request, pk):
             'reason':'User authentication failed',
         }
         return render(request,'error_page.html',context=context)
+
+def addMemoryView(request):
+    pass
