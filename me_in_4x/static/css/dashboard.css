@@ -1,0 +1,44 @@
+.header {
+    margin-top: 0px;
+    height: 180px;
+    width: 100%;
+    border: 1px dashed #512DAB;
+    border-radius: 20px;
+    padding: 20px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    background-color: #f9fcff;
+}
+
+.info {
+    margin-top: 20px;
+    height: 200px;
+    width: 100%;
+    border: 1px dashed rgb(224, 243, 51);
+    border-radius: 20px;
+    padding: 20px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    background-color: #f9fcff;
+}
+
+.dropdown-menu {
+    background-color: #9575cd;
+}
+
+.dropdown-menu .dropdown-item {
+    color: ghostwhite;
+}
+
+.dropdown-menu .dropdown-item:hover {
+    color: #9575cd;
+}
+
+.dropdown-menu .dropdown-item:focus {
+    background-color: #512DAB;
+    color: ghostwhite;
+}

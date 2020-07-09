@@ -37,3 +37,13 @@ footer {
     margin-bottom: 25px;
     background-color: #f9fcff;
 }
+
+.signup-form {
+    border: 1px dashed #512DAB;
+    border-radius: 20px;
+    padding: 20px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
