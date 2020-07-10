@@ -30,18 +30,20 @@
 <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span class="fa fa-sign-in fa-lg"></span> Login</a>
 </li>
 {% endif %} {% endblock navlinks %} {% block head %}
-<link rel="stylesheet" href="{% static 'css/dashboard.css' %}"> {% endblock head %} {% block header %} {% if user.profile.email_confirmed %}
-<div class="email-info">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-10 offset-1"><strong>You haven't verified your email, please verify it within seven days of registering.</strong></div>
-            <div class="col-1">
-                <span id="info-remover">&times;</span>
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}"> {% endblock head %} {% block header %} {% endblock header %} {% block body %} {% if user.profile.email_confirmed %}
+<div class="row">
+    <div class="email-info">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-10 offset-1"><strong>You haven't verified your email, please verify it within seven days of registering.</strong></div>
+                <div class="col-1">
+                    <span id="info-remover">&times;</span>
+                </div>
             </div>
         </div>
     </div>
 </div>
-{% endif %} {% endblock header %} {% block body %} {% if memories|length %}
+{% endif %} {% if memories|length %}
 <div class="row align-items-center">
     <h2>Your memories will be listed here.</h2>
 </div>
@@ -61,9 +63,11 @@
 </div>
 {% endif %} {% endblock body %} {% block footer %}
 <script>
-    let btn = document.getElementById("#info-remover");
-    btn.addEventListener('click', function() {
-        btn.style = "display: none;";
-    });
+    let btn = document.getElementById("info-remover");
+    console.log(btn);
+    btn.onclick = function() {
+        let info_box = document.getElementsByClassName('email-info')[0];
+        info_box.style.display = "none";
+    }
 </script>
 {% endblock footer %}
