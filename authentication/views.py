@@ -98,7 +98,7 @@ def loginView(request):
             else:
                 return render(request, 'login.html', {'form':form,"message":"Invalid credentials"})
         else:
-            return render(request, 'login.html', {'form':form,"message":"Facing validation errors contect admin if problem persists."})
+            return render(request, 'login.html', {'form':form,"message":"Facing validation errors contact admin if problem persists."})
     else:
         form = LoginForm()
     return render(request, 'login.html', {'form': form,"message":""})
