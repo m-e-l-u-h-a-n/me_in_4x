@@ -1,0 +1,66 @@
+.box {
+    height: 300px;
+    width: max-content;
+}
+
+.box__file {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.box__file+label {
+    color: #512DAB;
+    display: inline-block;
+    cursor: pointer;
+}
+
+
+/* Used for highlighting the border when input eleement is selected using keyboard events */
+
+.box__file:focus+label {
+    outline: 1px dotted #512DAB;
+    outline: -webkit-focus-ring-color auto 5px
+}
+
+.box__file:focus+label,
+.box__file+label:hover {
+    color: #9575cd;
+}
+
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+    display: none;
+}
+
+.box.has-advanced-upload {
+    margin-top: 20px;
+    height: 180px;
+    width: 100%;
+    border: 1px dashed #512DAB;
+    border-radius: 20px;
+    padding: 20px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+    background-color: #f9fcff;
+}
+
+.box.has-advanced-upload .box__dragndrop {
+    display: inline;
+}
+
+.box.is-dragover {
+    background-color: #9575cd;
+    opacity: 0.4;
+}
+
+textarea {
+    resize: none;
+}

@@ -30,7 +30,7 @@
 <li class="nav-item"><a href="{% url 'login' %}" class="nav-link"><span class="fa fa-sign-in fa-lg"></span> Login</a>
 </li>
 {% endif %} {% endblock navlinks %} {% block head %}
-<link rel="stylesheet" href="{% static 'css/dashboard.css' %}"> {% endblock head %} {% block header %} {% endblock header %} {% block body %} {% if user.profile.email_confirmed %}
+<link rel="stylesheet" href="{% static 'css/dashboard.css' %}"> {% endblock head %} {% block body %} {% if user.profile.email_confirmed %}
 <div class="row">
     <div class="email-info">
         <div class="container">
